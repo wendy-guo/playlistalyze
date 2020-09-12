@@ -1,0 +1,50 @@
+* {
+  font-family: "Comfortaa";
+  color: rgb(184, 233, 164);
+  background-color: rgb(0, 0, 0);
+}
+
+#container {
+  display: flex;
+  flex-direction: row;
+}
+
+#logo {
+  width: 20%;
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  writing-mode: vertical-rl;
+  text-orientation: mixed;
+  font-size: 50px;
+  font-weight: 900;
+}
+
+#main {
+  width: 80%;
+}
+
+button {
+  background-color: rgb(184, 233, 164);
+  border-radius: 40px;
+  border: none;
+  color: black;
+  padding: 20px;
+}
+
+button:focus {
+  outline: 0;
+}
+
+button:hover {
+  background-color: rgb(131, 184, 110);
+  transform-origin: center;
+  transform: scale(1.05);
+  transition: ease-in-out 0.4s;
+}
+
+#main button {
+  display: block;
+  font-size: 20px;
+  font-weight: 700;
+}
