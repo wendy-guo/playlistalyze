@@ -8,6 +8,7 @@ class Playlists extends React.Component {
 
   handleClick = (playlistNum) => {
     this.setState({ selected: playlistNum });
+    console.log(this.state.selected);
   };
 
   render() {
@@ -16,7 +17,13 @@ class Playlists extends React.Component {
         haiiiiiiii
         {this.props.playlists.map((pl, i) => {
           return (
-            <Playlist key={i} num={i} name={pl} onClick={this.handleClick} />
+            <Playlist
+              selected={this.state.selected === i}
+              key={i}
+              num={i}
+              name={pl}
+              onClick={this.handleClick}
+            />
           );
         })}
         <button onClick={() => this.props.onSubmit(this.state.selected)}>
@@ -31,7 +38,9 @@ class Playlist extends Playlists {
   render() {
     return (
       <button
-        className="playlist"
+        className={
+          this.props.selected ? "playlist selected-playlist" : "playlist"
+        }
         onClick={() => this.props.onClick(this.props.num)}
       >
         hello i'm playlist {this.props.num} {this.props.name}
