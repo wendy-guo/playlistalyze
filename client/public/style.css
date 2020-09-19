@@ -1,7 +1,12 @@
 * {
   font-family: "Comfortaa";
   color: rgb(0, 0, 0);
-  background-color: white;
+  background-color: rgb(251, 255, 241);
+}
+
+#login,
+#loggedin {
+  display: none;
 }
 
 #container {
@@ -58,12 +63,14 @@ a {
   padding: 20px;
 }
 
-.btn:focus {
+.btn:focus,
+button {
   outline: 0;
 }
 
 .btn:hover {
-  background-color: rgb(245, 202, 195);
+  background-color: rgb(232, 245, 195);
+  color: black;
   transform-origin: center;
   transform: scale(1.07);
   transition: ease-in-out 0.4s;
@@ -132,4 +139,25 @@ a {
 .pfp {
   border-radius: 50%;
   vertical-align: middle;
+}
+
+.playlists {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+}
+
+.playlist {
+  margin: 0 auto 0 auto;
+  width: 50%;
+  padding: 2px 0px 2px 0px;
+  border: none;
+}
+
+.selected-playlist {
+  border: rgb(245, 202, 195);
+}
+
+.playlist:hover {
+  background-color: rgb(232, 245, 195);
 }
