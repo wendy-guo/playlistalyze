@@ -53,13 +53,19 @@
         success: function (pl_res) {
           var playlists = pl_res.items;
           var playlistsNames = [];
+          var playlistsIds = [];
           console.log("playlist response", pl_res);
           // for each playlist
 
           playlists.forEach((pl) => {
-            playlistsNames.push(pl.name);
+            playlistsNames.push([pl.name]);
+            playlistsIds.push([pl.id]);
+          });
+
+          const handlePlaylistSubmit = (playlistNum) => {
+            console.log("sending request for playlist tracks", playlistNum);
             $.ajax({
-              url: `https://api.spotify.com/v1/playlists/${pl.id}/tracks`,
+              url: `https://api.spotify.com/v1/playlists/${playlistsIds[playlistNum]}/tracks`,
               headers: {
                 Authorization: "Bearer " + access_token,
               },
@@ -75,6 +81,7 @@
                         Authorization: "Bearer " + access_token,
                       },
                       success: function (artist_res) {
+                        console.log(artist_res);
                         //console.log(
                         //`album ${artist_res.name} genres ${artist_res.genres}`
                         //);
@@ -85,13 +92,21 @@
                 });
               },
             });
-          });
+          };
 
-          ReactDOM.render(e(Playlists), userPlaylists);
+          console.log(playlistsNames);
+          ReactDOM.render(
+            <Playlists
+              playlists={playlistsNames}
+              onSubmit={handlePlaylistSubmit}
+            />,
+            userPlaylists
+          );
         },
       });
     } else {
       // render initial screen
+      console.log("initial screen");
       $("#login").show();
       $("#loggedin").hide();
     }
