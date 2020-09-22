@@ -54,15 +54,25 @@
           var playlists = pl_res.items;
           var playlistsNames = [];
           var playlistsIds = [];
-          console.log("playlist response", pl_res);
-          // for each playlist
 
-          playlists.forEach((pl) => {
-            playlistsNames.push([pl.name]);
-            playlistsIds.push([pl.id]);
-          });
+          let playlistArtistData = new Map();
+          let playlistArtistGenreData = new Map();
+          let playlistAlbumData = new Map();
+          let playlistAlbumYearData = new Map();
+
+          const analyzePlaylist = () => {
+            let keywords = new Map();
+            playlistArtistData = new Map(
+              [...playlistArtistData.entries()].sort((a, b) => a[1] - b[1])
+            );
+
+            $("#loading").hide();
+            $("#analysis").show();
+          };
 
           const handlePlaylistSubmit = (playlistNum) => {
+            $("#logged-in").hide();
+            $("#loading").show();
             console.log("sending request for playlist tracks", playlistNum);
             $.ajax({
               url: `https://api.spotify.com/v1/playlists/${playlistsIds[playlistNum]}/tracks`,
@@ -71,30 +81,63 @@
               },
               success: function (tracks_res) {
                 var tracks = tracks_res.items;
+                var artistIdData = new Map();
                 //console.log("tracks", tracks);
                 tracks.forEach((tr) => {
                   // get album to get genre
                   tr.track.artists.forEach((artist) => {
-                    $.ajax({
-                      url: `https://api.spotify.com/v1/artists/${artist.id}`,
-                      headers: {
-                        Authorization: "Bearer " + access_token,
-                      },
-                      success: function (artist_res) {
-                        console.log(artist_res);
-                        //console.log(
-                        //`album ${artist_res.name} genres ${artist_res.genres}`
-                        //);
-                        //console.log(artist_res);
-                      },
-                    });
+                    console.log(artist);
+                    artistIdData[artist.id] =
+                      (artistIdData[artist.id] || 0) + 1;
+                  });
+                  console.log("hi", tr.track.album);
+                  // album name data
+                  playlistAlbumData[tr.track.album.name] =
+                    (playlistAlbumData[tr.track.album.name] || 0) + 1;
+                  // album release year data
+                  playlistAlbumYearData[
+                    tr.track.album.release_date.slice(0, 4)
+                  ] =
+                    (playlistAlbumYearData[
+                      tr.track.album.release_date.slice(0, 4)
+                    ] || 0) + 1;
+                });
+
+                Object.keys(artistIdData).forEach((artistId) => {
+                  $.ajax({
+                    url: `https://api.spotify.com/v1/artists/${artistId}`,
+                    headers: {
+                      Authorization: "Bearer " + access_token,
+                    },
+                    success: function (artist_res) {
+                      playlistArtistData[artist_res.name] =
+                        artistIdData[artistId];
+                      artist_res.genres.forEach((genre) => {
+                        playlistArtistGenreData[genre] =
+                          (playlistArtistGenreData[genre] || 0) + 1;
+                      });
+                    },
                   });
                 });
+
+                console.log(playlistArtistData);
+                console.log(playlistArtistGenreData);
+                console.log(playlistAlbumData);
+                console.log(playlistAlbumYearData);
+                analyzePlaylist();
               },
             });
           };
 
-          console.log(playlistsNames);
+          console.log("playlist response", pl_res);
+
+          // add each playlist to array
+          playlists.forEach((pl) => {
+            playlistsNames.push([pl.name]);
+            playlistsIds.push([pl.id]);
+          });
+
+          // render react component Playlists
           ReactDOM.render(
             <Playlists
               playlists={playlistsNames}
@@ -110,26 +153,5 @@
       $("#login").show();
       $("#loggedin").hide();
     }
-
-    /**
-    document.getElementById("obtain-new-token").addEventListener(
-      "click",
-      function () {
-        $.ajax({
-          url: "/refresh_token",
-          data: {
-            refresh_token: refresh_token,
-          },
-        }).done(function (data) {
-          access_token = data.access_token;
-          oauthPlaceholder.innerHTML = oauthTemplate({
-            access_token: access_token,
-            refresh_token: refresh_token,
-          });
-        });
-      },
-      false
-    );
-    */
   }
 })();
