@@ -5,7 +5,9 @@
 }
 
 #login,
-#loggedin {
+#loggedin,
+#loading,
+#analysis {
   display: none;
 }
 
