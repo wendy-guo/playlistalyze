@@ -64,29 +64,47 @@
             console.log($("#analysis").css("display"));
             console.log(sortedArtistData);
 
+            let shuffledArtistData = sortedArtistData
+              .map((a) => ({ sort: Math.random(), value: a }))
+              .sort((a, b) => a.sort - b.sort)
+              .map((a) => a.value);
+
+            let shuffledArtistGenreData = sortedArtistGenreData
+              .map((a) => ({ sort: Math.random(), value: a }))
+              .sort((a, b) => a.sort - b.sort)
+              .map((a) => a.value);
+
+            let shuffledAlbumData = sortedAlbumData
+              .map((a) => ({
+                sort: Math.random(),
+                value: a,
+              }))
+              .sort((a, b) => a.sort - b.sort)
+              .map((a) => a.value);
+
+            let shuffledAlbumYearData = sortedAlbumYearData
+              .map((a) => ({
+                sort: Math.random(),
+                value: a,
+              }))
+              .sort((a, b) => a.sort - b.sort)
+              .map((a) => a.value);
+
             new Promise((resolve) => {
-              console.log("hai");
               $("#loading").hide();
               $("#analysis").show();
-              while ($("#analysis").css("display") == "none") {}
-              console.log($("#analysis").css("display"));
               resolve("done");
             }).then(() => {
-              console.log(sortedArtistData.map((arr) => arr[0]));
-              console.log(sortedArtistData.map((arr) => arr[1]));
-
               let artistChart = new Chart(
                 document.getElementById("artist-chart").getContext("2d"),
                 {
                   type: "pie",
                   data: {
-                    labels: sortedArtistData.map((arr) => arr[0]).slice(0, 10),
+                    labels: shuffledArtistData.map((arr) => arr[0]),
                     datasets: [
                       {
                         label: "number of songs by artist",
-                        data: sortedArtistData
-                          .map((arr) => arr[1])
-                          .slice(0, 10),
+                        data: shuffledArtistData.map((arr) => arr[1]),
                         backgroundColor: [
                           "rgba(255, 99, 132, 0.2)",
                           "rgba(54, 162, 235, 0.2)",
@@ -117,15 +135,11 @@
                 {
                   type: "radar",
                   data: {
-                    labels: sortedArtistGenreData
-                      .map((arr) => arr[0])
-                      .slice(0, 10),
+                    labels: shuffledArtistGenreData.map((arr) => arr[0]),
                     datasets: [
                       {
                         label: "# of Votes",
-                        data: sortedArtistGenreData
-                          .map((arr) => arr[1])
-                          .slice(0, 10),
+                        data: shuffledArtistGenreData.map((arr) => arr[1]),
                         backgroundColor: [
                           "rgba(255, 99, 132, 0.2)",
                           "rgba(54, 162, 235, 0.2)",
@@ -158,11 +172,48 @@
                 {
                   type: "bar",
                   data: {
-                    labels: sortedAlbumData.map((arr) => arr[0]).slice(0, 10),
+                    labels: shuffledAlbumData.map((arr) => arr[0]),
                     datasets: [
                       {
                         label: "# of Votes",
-                        data: sortedAlbumData.map((arr) => arr[1]).slice(0, 10),
+                        data: shuffledAlbumData.map((arr) => arr[1]),
+                        backgroundColor: [
+                          "rgba(255, 99, 132, 0.2)",
+                          "rgba(54, 162, 235, 0.2)",
+                          "rgba(255, 206, 86, 0.2)",
+                          "rgba(75, 192, 192, 0.2)",
+                          "rgba(153, 102, 255, 0.2)",
+                          "rgba(255, 159, 64, 0.2)",
+                        ],
+                        borderColor: [
+                          "rgba(255, 99, 132, 1)",
+                          "rgba(54, 162, 235, 1)",
+                          "rgba(255, 206, 86, 1)",
+                          "rgba(75, 192, 192, 1)",
+                          "rgba(153, 102, 255, 1)",
+                          "rgba(255, 159, 64, 1)",
+                        ],
+                        borderWidth: 1,
+                      },
+                    ],
+                  },
+                  options: {
+                    responsive: true,
+                    animation: { duration: 1700 },
+                  },
+                }
+              );
+
+              let albumYearChart = new Chart(
+                document.getElementById("album-year-chart").getContext("2d"),
+                {
+                  type: "doughnut",
+                  data: {
+                    labels: shuffledAlbumYearData.map((arr) => arr[0]),
+                    datasets: [
+                      {
+                        label: "# of Votes",
+                        data: shuffledAlbumYearData.map((arr) => arr[1]),
                         backgroundColor: [
                           "rgba(255, 99, 132, 0.2)",
                           "rgba(54, 162, 235, 0.2)",
@@ -197,45 +248,18 @@
 
             // sort all the maps in asc ending order for frequency
             new Promise((resolve) => {
-              sortedArtistData = Object.entries(playlistArtistData).sort(
-                ([, a], [, b]) => b - a
-              );
-              sortedArtistGenreData = Object.entries(
-                playlistArtistGenreData
-              ).sort(([, a], [, b]) => b - a);
-              sortedAlbumData = Object.entries(playlistAlbumData).sort(
-                ([, a], [, b]) => b - a
-              );
-              sortedAlbumYearData = Object.entries(playlistAlbumYearData).sort(
-                ([, a], [, b]) => b - a
-              );
-
-              /** 
-              while (
-                Object.keys(sortedArtistData).length !=
-                  Object.keys(playlistArtistData).length ||
-                Object.keys(sortedArtistGenreData).length !=
-                  Object.keys(playlistArtistGenreData).length ||
-                Object.keys(sortedAlbumData).length !=
-                  Object.keys(playlistAlbumData).length ||
-                Object.keys(sortedAlbumYearData).length !=
-                  Object.keys(playlistAlbumYearData).length
-              ) {
-                console.log("sorting");
-              } */
-
-              while (
-                sortedArtistData.length !=
-                  Object.keys(playlistArtistData).length ||
-                sortedArtistGenreData.length !=
-                  Object.keys(playlistArtistGenreData).length ||
-                sortedAlbumData.length !=
-                  Object.keys(playlistAlbumData).length ||
-                sortedAlbumYearData.length !=
-                  Object.keys(playlistAlbumYearData).length
-              ) {
-                console.log("sorting");
-              }
+              sortedArtistData = Object.entries(playlistArtistData)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 10);
+              sortedArtistGenreData = Object.entries(playlistArtistGenreData)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 7);
+              sortedAlbumData = Object.entries(playlistAlbumData)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 7);
+              sortedAlbumYearData = Object.entries(playlistAlbumYearData)
+                .sort(([, a], [, b]) => b - a)
+                .slice(0, 7);
 
               console.log(Object.keys(playlistArtistData).length);
               resolve();
@@ -297,18 +321,9 @@
                                 (playlistArtistGenreData[genre] || 0) + 1;
                             });
 
-                            console.log(playlistArtistData);
+                            console.log(i, playlistArtistData);
 
                             if (i === arr.length - 1) {
-                              while (
-                                Object.keys(playlistArtistData).length !=
-                                i + 1
-                              ) {
-                                console.log(
-                                  "haiiii",
-                                  Object.keys(playlistArtistData).length
-                                );
-                              }
                               console.log(i, Object.keys(playlistArtistData));
                               resolve();
                             }
