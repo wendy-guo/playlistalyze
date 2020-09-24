@@ -60,6 +60,137 @@
           let sortedAlbumData = new Map();
           let sortedAlbumYearData = new Map();
 
+          const displayResults = () => {
+            console.log($("#analysis").css("display"));
+            console.log(sortedArtistData);
+
+            new Promise((resolve) => {
+              console.log("hai");
+              $("#loading").hide();
+              $("#analysis").show();
+              while ($("#analysis").css("display") == "none") {}
+              console.log($("#analysis").css("display"));
+              resolve("done");
+            }).then(() => {
+              console.log(sortedArtistData.map((arr) => arr[0]));
+              console.log(sortedArtistData.map((arr) => arr[1]));
+
+              let artistChart = new Chart(
+                document.getElementById("artist-chart").getContext("2d"),
+                {
+                  type: "pie",
+                  data: {
+                    labels: sortedArtistData.map((arr) => arr[0]).slice(0, 10),
+                    datasets: [
+                      {
+                        label: "number of songs by artist",
+                        data: sortedArtistData
+                          .map((arr) => arr[1])
+                          .slice(0, 10),
+                        backgroundColor: [
+                          "rgba(255, 99, 132, 0.2)",
+                          "rgba(54, 162, 235, 0.2)",
+                          "rgba(255, 206, 86, 0.2)",
+                          "rgba(75, 192, 192, 0.2)",
+                          "rgba(153, 102, 255, 0.2)",
+                        ],
+                        borderColor: [
+                          "rgba(255, 99, 132, 1)",
+                          "rgba(54, 162, 235, 1)",
+                          "rgba(255, 206, 86, 1)",
+                          "rgba(75, 192, 192, 1)",
+                          "rgba(153, 102, 255, 1)",
+                        ],
+                        borderWidth: 1,
+                      },
+                    ],
+                  },
+                  options: {
+                    responsive: true,
+                    animation: { duration: 1700 },
+                  },
+                }
+              );
+
+              let artistGenreChart = new Chart(
+                document.getElementById("artist-genre-chart").getContext("2d"),
+                {
+                  type: "radar",
+                  data: {
+                    labels: sortedArtistGenreData
+                      .map((arr) => arr[0])
+                      .slice(0, 10),
+                    datasets: [
+                      {
+                        label: "# of Votes",
+                        data: sortedArtistGenreData
+                          .map((arr) => arr[1])
+                          .slice(0, 10),
+                        backgroundColor: [
+                          "rgba(255, 99, 132, 0.2)",
+                          "rgba(54, 162, 235, 0.2)",
+                          "rgba(255, 206, 86, 0.2)",
+                          "rgba(75, 192, 192, 0.2)",
+                          "rgba(153, 102, 255, 0.2)",
+                          "rgba(255, 159, 64, 0.2)",
+                        ],
+                        borderColor: [
+                          "rgba(255, 99, 132, 1)",
+                          "rgba(54, 162, 235, 1)",
+                          "rgba(255, 206, 86, 1)",
+                          "rgba(75, 192, 192, 1)",
+                          "rgba(153, 102, 255, 1)",
+                          "rgba(255, 159, 64, 1)",
+                        ],
+                        borderWidth: 1,
+                      },
+                    ],
+                  },
+                  options: {
+                    responsive: true,
+                    animation: { duration: 1700 },
+                  },
+                }
+              );
+
+              let albumChart = new Chart(
+                document.getElementById("album-chart").getContext("2d"),
+                {
+                  type: "bar",
+                  data: {
+                    labels: sortedAlbumData.map((arr) => arr[0]).slice(0, 10),
+                    datasets: [
+                      {
+                        label: "# of Votes",
+                        data: sortedAlbumData.map((arr) => arr[1]).slice(0, 10),
+                        backgroundColor: [
+                          "rgba(255, 99, 132, 0.2)",
+                          "rgba(54, 162, 235, 0.2)",
+                          "rgba(255, 206, 86, 0.2)",
+                          "rgba(75, 192, 192, 0.2)",
+                          "rgba(153, 102, 255, 0.2)",
+                          "rgba(255, 159, 64, 0.2)",
+                        ],
+                        borderColor: [
+                          "rgba(255, 99, 132, 1)",
+                          "rgba(54, 162, 235, 1)",
+                          "rgba(255, 206, 86, 1)",
+                          "rgba(75, 192, 192, 1)",
+                          "rgba(153, 102, 255, 1)",
+                          "rgba(255, 159, 64, 1)",
+                        ],
+                        borderWidth: 1,
+                      },
+                    ],
+                  },
+                  options: {
+                    responsive: true,
+                    animation: { duration: 1700 },
+                  },
+                }
+              );
+            });
+          };
 
           const analyzePlaylist = () => {
             console.log(playlistArtistData);
@@ -109,7 +240,7 @@
               console.log(Object.keys(playlistArtistData).length);
               resolve();
             }).then(() => {
-              //displayResults();
+              displayResults();
             });
           };
 
