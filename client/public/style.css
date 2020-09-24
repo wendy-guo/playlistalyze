@@ -167,3 +167,14 @@ button {
 .playlist:hover {
   background-color: rgb(232, 245, 195);
 }
+
+canvas {
+  height: 100px;
+  width: 100px;
+}
+
+.charty {
+  width: 50vw;
+  margin: auto;
+  border: solid 1px black;
+}
