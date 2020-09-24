@@ -14,7 +14,6 @@ class Playlists extends React.Component {
   render() {
     return (
       <div className="playlists">
-        haiiiiiiii
         {this.props.playlists.map((pl, i) => {
           return (
             <Playlist
