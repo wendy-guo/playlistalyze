@@ -11,6 +11,7 @@
     <link rel="stylesheet" href="./style.css" />
     <script src="//cdnjs.cloudflare.com/ajax/libs/handlebars.js/2.0.0-alpha.1/handlebars.min.js"></script>
     <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
   </head>
   <body>
     <div id="login">
@@ -30,18 +31,23 @@
       <div id="user-playlists"></div>
     </div>
 
-    <div id="loading">
-      page loading
-    </div>
+    <div id="loading">page loading</div>
 
     <div id="analysis">
       playlist analysis
       <div id="keywords">overall keywords (artists, genres, albums)</div>
-      <div id="artists">artists</div>
-      <div id="artist-genres">artist genres</div>
-      <div id="albums">albums</div>
-      <div id="years">years</div>
-      <div id="season">season</div>
+      <div class="charty">
+        top artists
+        <canvas id="artist-chart"></canvas>
+      </div>
+      <div class="charty">
+        top artist genres
+        <canvas id="artist-genre-chart"></canvas>
+      </div>
+      <div class="charty">
+        top albums
+        <canvas id="album-chart"></canvas>
+      </div>
     </div>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
