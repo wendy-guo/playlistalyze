@@ -15,7 +15,7 @@ var cookieParser = require("cookie-parser");
 
 var client_id = "6f08874f012647aeb0f33e997c8440a9"; // Your client id
 var client_secret = "894b02a94a7b48069162435fb00b9251"; // Your secret
-var redirect_uri = "http://localhost:5000/callback"; // Your redirect uri
+var redirect_uri = "https://playlistalyze.herokuapp.com/callback"; // Your redirect uri
 
 /**
  * Generates a random string containing numbers and letters
