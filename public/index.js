@@ -93,6 +93,11 @@
             new Promise((resolve) => {
               $("#loading").hide();
               $("#analysis").show();
+              $("#analysis").css({
+                display: "flex",
+                "flex-direction": "column",
+              });
+
               resolve("done");
             }).then(() => {
               let artistChart = new Chart(
@@ -103,21 +108,31 @@
                     labels: shuffledArtistData.map((arr) => arr[0]),
                     datasets: [
                       {
-                        label: "number of songs by artist",
+                        label: "# of tracks",
                         data: shuffledArtistData.map((arr) => arr[1]),
                         backgroundColor: [
-                          "rgba(255, 99, 132, 0.2)",
-                          "rgba(54, 162, 235, 0.2)",
-                          "rgba(255, 206, 86, 0.2)",
-                          "rgba(75, 192, 192, 0.2)",
-                          "rgba(153, 102, 255, 0.2)",
+                          "rgba(255, 204, 204, 0.6)",
+                          "rgba(255, 245, 203, 0.6)",
+                          "rgba(230, 238, 187, 0.6)",
+                          "rgba(187, 238, 217, 0.6)",
+                          "rgba(181, 236, 232, 0.6)",
+                          "rgba(181, 211, 236, 0.6)",
+                          "rgba(189, 181, 236, 0.6)",
+                          "rgba(229, 186, 238, 0.6)",
+                          "rgba(235, 163, 193, 0.6)",
+                          "rgba(241, 181, 170, 0.6)",
                         ],
                         borderColor: [
-                          "rgba(255, 99, 132, 1)",
-                          "rgba(54, 162, 235, 1)",
-                          "rgba(255, 206, 86, 1)",
-                          "rgba(75, 192, 192, 1)",
-                          "rgba(153, 102, 255, 1)",
+                          "rgba(255, 204, 204, 1)",
+                          "rgba(255, 245, 203, 1)",
+                          "rgba(230, 238, 187, 1)",
+                          "rgba(187, 238, 217, 1)",
+                          "rgba(181, 236, 232, 1)",
+                          "rgba(181, 211, 236, 1)",
+                          "rgba(189, 181, 236, 1)",
+                          "rgba(229, 186, 238, 1)",
+                          "rgba(235, 163, 193, 1)",
+                          "rgba(241, 181, 170, 1)",
                         ],
                         borderWidth: 1,
                       },
@@ -126,6 +141,12 @@
                   options: {
                     responsive: true,
                     animation: { duration: 1700 },
+                    legend: {
+                      labels: {
+                        fontFamily: "Comfortaa",
+                        fontColor: "black",
+                      },
+                    },
                   },
                 }
               );
@@ -138,23 +159,31 @@
                     labels: shuffledArtistGenreData.map((arr) => arr[0]),
                     datasets: [
                       {
-                        label: "# of Votes",
+                        label: "# of tracks",
                         data: shuffledArtistGenreData.map((arr) => arr[1]),
                         backgroundColor: [
-                          "rgba(255, 99, 132, 0.2)",
-                          "rgba(54, 162, 235, 0.2)",
-                          "rgba(255, 206, 86, 0.2)",
-                          "rgba(75, 192, 192, 0.2)",
-                          "rgba(153, 102, 255, 0.2)",
-                          "rgba(255, 159, 64, 0.2)",
+                          "rgba(255, 204, 204, 0.4)",
+                          "rgba(255, 245, 203, 0.4)",
+                          "rgba(230, 238, 187, 0.4)",
+                          "rgba(187, 238, 217, 0.4)",
+                          "rgba(181, 236, 232, 0.4)",
+                          "rgba(181, 211, 236, 0.4)",
+                          "rgba(189, 181, 236, 0.4)",
+                          "rgba(229, 186, 238, 0.4)",
+                          "rgba(235, 163, 193, 0.4)",
+                          "rgba(241, 181, 170, 0.4)",
                         ],
                         borderColor: [
-                          "rgba(255, 99, 132, 1)",
-                          "rgba(54, 162, 235, 1)",
-                          "rgba(255, 206, 86, 1)",
-                          "rgba(75, 192, 192, 1)",
-                          "rgba(153, 102, 255, 1)",
-                          "rgba(255, 159, 64, 1)",
+                          "rgba(255, 204, 204, 1)",
+                          "rgba(255, 245, 203, 1)",
+                          "rgba(230, 238, 187, 1)",
+                          "rgba(187, 238, 217, 1)",
+                          "rgba(181, 236, 232, 1)",
+                          "rgba(181, 211, 236, 1)",
+                          "rgba(189, 181, 236, 1)",
+                          "rgba(229, 186, 238, 1)",
+                          "rgba(235, 163, 193, 1)",
+                          "rgba(241, 181, 170, 1)",
                         ],
                         borderWidth: 1,
                       },
@@ -163,6 +192,12 @@
                   options: {
                     responsive: true,
                     animation: { duration: 1700 },
+                    legend: {
+                      labels: {
+                        fontFamily: "Comfortaa",
+                        fontColor: "black",
+                      },
+                    },
                   },
                 }
               );
@@ -170,28 +205,36 @@
               let albumChart = new Chart(
                 document.getElementById("album-chart").getContext("2d"),
                 {
-                  type: "bar",
+                  type: "horizontalBar",
                   data: {
                     labels: shuffledAlbumData.map((arr) => arr[0]),
                     datasets: [
                       {
-                        label: "# of Votes",
+                        label: "# of tracks",
                         data: shuffledAlbumData.map((arr) => arr[1]),
                         backgroundColor: [
-                          "rgba(255, 99, 132, 0.2)",
-                          "rgba(54, 162, 235, 0.2)",
-                          "rgba(255, 206, 86, 0.2)",
-                          "rgba(75, 192, 192, 0.2)",
-                          "rgba(153, 102, 255, 0.2)",
-                          "rgba(255, 159, 64, 0.2)",
+                          "rgba(255, 204, 204, 0.6)",
+                          "rgba(255, 245, 203, 0.6)",
+                          "rgba(230, 238, 187, 0.6)",
+                          "rgba(187, 238, 217, 0.6)",
+                          "rgba(181, 236, 232, 0.6)",
+                          "rgba(181, 211, 236, 0.6)",
+                          "rgba(189, 181, 236, 0.6)",
+                          "rgba(229, 186, 238, 0.6)",
+                          "rgba(235, 163, 193, 0.6)",
+                          "rgba(241, 181, 170, 0.6)",
                         ],
                         borderColor: [
-                          "rgba(255, 99, 132, 1)",
-                          "rgba(54, 162, 235, 1)",
-                          "rgba(255, 206, 86, 1)",
-                          "rgba(75, 192, 192, 1)",
-                          "rgba(153, 102, 255, 1)",
-                          "rgba(255, 159, 64, 1)",
+                          "rgba(255, 204, 204, 1)",
+                          "rgba(255, 245, 203, 1)",
+                          "rgba(230, 238, 187, 1)",
+                          "rgba(187, 238, 217, 1)",
+                          "rgba(181, 236, 232, 1)",
+                          "rgba(181, 211, 236, 1)",
+                          "rgba(189, 181, 236, 1)",
+                          "rgba(229, 186, 238, 1)",
+                          "rgba(235, 163, 193, 1)",
+                          "rgba(241, 181, 170, 1)",
                         ],
                         borderWidth: 1,
                       },
@@ -200,6 +243,12 @@
                   options: {
                     responsive: true,
                     animation: { duration: 1700 },
+                    legend: {
+                      labels: {
+                        fontFamily: "Comfortaa",
+                        fontColor: "black",
+                      },
+                    },
                   },
                 }
               );
@@ -212,23 +261,31 @@
                     labels: shuffledAlbumYearData.map((arr) => arr[0]),
                     datasets: [
                       {
-                        label: "# of Votes",
+                        label: "# of tracks",
                         data: shuffledAlbumYearData.map((arr) => arr[1]),
                         backgroundColor: [
-                          "rgba(255, 99, 132, 0.2)",
-                          "rgba(54, 162, 235, 0.2)",
-                          "rgba(255, 206, 86, 0.2)",
-                          "rgba(75, 192, 192, 0.2)",
-                          "rgba(153, 102, 255, 0.2)",
-                          "rgba(255, 159, 64, 0.2)",
+                          "rgba(255, 204, 204, 0.6)",
+                          "rgba(255, 245, 203, 0.6)",
+                          "rgba(230, 238, 187, 0.6)",
+                          "rgba(187, 238, 217, 0.6)",
+                          "rgba(181, 236, 232, 0.6)",
+                          "rgba(181, 211, 236, 0.6)",
+                          "rgba(189, 181, 236, 0.6)",
+                          "rgba(229, 186, 238, 0.6)",
+                          "rgba(235, 163, 193, 0.6)",
+                          "rgba(241, 181, 170, 0.6)",
                         ],
                         borderColor: [
-                          "rgba(255, 99, 132, 1)",
-                          "rgba(54, 162, 235, 1)",
-                          "rgba(255, 206, 86, 1)",
-                          "rgba(75, 192, 192, 1)",
-                          "rgba(153, 102, 255, 1)",
-                          "rgba(255, 159, 64, 1)",
+                          "rgba(255, 204, 204, 1)",
+                          "rgba(255, 245, 203, 1)",
+                          "rgba(230, 238, 187, 1)",
+                          "rgba(187, 238, 217, 1)",
+                          "rgba(181, 236, 232, 1)",
+                          "rgba(181, 211, 236, 1)",
+                          "rgba(189, 181, 236, 1)",
+                          "rgba(229, 186, 238, 1)",
+                          "rgba(235, 163, 193, 1)",
+                          "rgba(241, 181, 170, 1)",
                         ],
                         borderWidth: 1,
                       },
@@ -237,6 +294,12 @@
                   options: {
                     responsive: true,
                     animation: { duration: 1700 },
+                    legend: {
+                      labels: {
+                        fontFamily: "Comfortaa",
+                        fontColor: "black",
+                      },
+                    },
                   },
                 }
               );
@@ -271,6 +334,11 @@
           const handlePlaylistSubmit = (playlistNum) => {
             $("#logged-in").hide();
             $("#loading").show();
+            $("#loading").css({
+              display: "flex",
+              "justify-content": "center",
+              "margin-top": "50vh",
+            });
             console.log("sending request for playlist tracks", playlistNum);
             $.ajax({
               url: `https://api.spotify.com/v1/playlists/${playlistsIds[playlistNum]}/tracks`,
