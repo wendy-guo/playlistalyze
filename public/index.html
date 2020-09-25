@@ -21,7 +21,7 @@
           <a href="/login" class="btn">log in to spotify</a>
         </div>
         <div id="logo-cont">
-          <h1>istify · playlistify</h1>
+          <h1>yze · playlistalyze</h1>
         </div>
       </div>
     </div>
@@ -31,34 +31,41 @@
       <div id="user-playlists"></div>
     </div>
 
-    <div id="loading">page loading</div>
+    <div id="loading">
+      <div>loading</div>
+    </div>
 
     <div id="analysis">
-      playlist analysis
-      <div id="keywords">overall keywords (artists, genres, albums)</div>
+      <div>
+        <h2>playlist analysis</h3>
+      </div>
       <div class="charty">
-        top artists
+        <h3>top artists</h2>
         <canvas id="artist-chart"></canvas>
       </div>
       <div class="charty">
-        top artist genres
+        <h3>top artist genres</h2>
         <canvas id="artist-genre-chart"></canvas>
       </div>
       <div class="charty">
-        top albums
+        <h3>top albums</h2>
         <canvas id="album-chart"></canvas>
       </div>
       <div class="charty">
-        top album release years
+        <h3>top album release years</h2>
         <canvas id="album-year-chart"></canvas>
       </div>
     </div>
 
     <script id="user-profile-template" type="text/x-handlebars-template">
-      <h2>
-        hello {{display_name}}
+      <div>
+        <h2>
+          {{display_name}}'s playlists
+        </h2>
+      </div>
+      <div>
         <img class="pfp" width="70" src="{{images.0.url}}" />
-      </h2>
+      </div>
     </script>
 
     <!-- react scripts-->
