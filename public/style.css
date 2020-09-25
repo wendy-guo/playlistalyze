@@ -1,6 +1,7 @@
 * {
   font-family: "Comfortaa";
   color: rgb(0, 0, 0);
+  background-color: rgb(255, 204, 204);
   background-color: rgb(251, 255, 241);
 }
 
@@ -9,6 +10,30 @@
 #loading,
 #analysis {
   display: none;
+}
+
+#logged-in {
+  display: flex;
+  flex-direction: column;
+}
+
+#user-profile {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+#user-profile div {
+  margin: 10px;
+}
+
+#user-profile {
+  margin: auto;
+}
+
+#user-playlists {
+  margin-top: 20px;
+  margin-bottom: 20px;
 }
 
 #container {
@@ -49,7 +74,7 @@
 }
 
 h1 {
-  font-size: 100px;
+  font-size: 90px;
 }
 
 a {
@@ -57,7 +82,8 @@ a {
   text-align: center;
 }
 
-.btn {
+.btn,
+.submit-btn {
   background-color: black;
   border-radius: 40px;
   border: none;
@@ -70,12 +96,20 @@ button {
   outline: 0;
 }
 
-.btn:hover {
+.btn:hover,
+.submit-btn:hover {
   background-color: rgb(232, 245, 195);
   color: black;
   transform-origin: center;
   transform: scale(1.07);
   transition: ease-in-out 0.4s;
+}
+
+.submit-btn {
+  padding: 10px;
+  margin: 10px auto;
+  width: 10%;
+  font-weight: 900;
 }
 
 #main-cont .btn {
@@ -176,5 +210,29 @@ canvas {
 .charty {
   width: 50vw;
   margin: auto;
-  border: solid 1px black;
+  margin-bottom: 20px;
+}
+
+#analysis div {
+  align-self: center;
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+}
+
+h3 {
+  font-size: 25px;
+  font-weight: 800;
+  display: block;
+  align-self: center;
+  animation: fontColourChange 15s ease-in-out;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+}
+
+#loading div {
+  animation: fontColourChange 1s ease-in-out;
+  animation-direction: alternate;
+  animation-iteration-count: infinite;
+  font-size: 100px;
 }
