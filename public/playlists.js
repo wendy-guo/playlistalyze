@@ -42,7 +42,7 @@ class Playlist extends Playlists {
         }
         onClick={() => this.props.onClick(this.props.num)}
       >
-        hello i'm playlist {this.props.num} {this.props.name}
+        {this.props.name}
       </button>
     );
   }
