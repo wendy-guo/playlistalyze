@@ -25,7 +25,7 @@ class Playlists extends React.Component {
             />
           );
         })}
-        <button onClick={() => this.props.onSubmit(this.state.selected)}>
+        <button className="submit-btn" onClick={() => this.props.onSubmit(this.state.selected)}>
           submit
         </button>
       </div>
